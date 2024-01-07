@@ -1,15 +1,21 @@
 <template>
   <div>
-
-
       <div
           v-for="(obj, index) in todos"
           v-bind:key="obj.id"
           class="todos-item"
       >
+
+      <img 
+        v-if="obj.imgSrc"
+        :src="obj.imgSrc"  
+         
+      >
+      /**Podemos usar o v-bind escrevendo apenas os 2 pontos ( : )*/
           {{ index}} - {{ obj.title }}
       </div>
 
+     
 
   </div>
 </template>
@@ -19,18 +25,21 @@ export default {
   name: 'App',
   data() {
       return {
+          imgAlt: 'Foto',          
           todos: [
               {
                   "userId": 1,
                   "id": 1,
                   "title": "delectus aut autem",
-                  "completed": false
+                  "completed": false,
+                  "imgSrc": 'https://placehold.co/150',
               },
               {
                   "userId": 1,
                   "id": 2,
                   "title": "quis ut nam facilis et officia qui",
-                  "completed": false
+                  "completed": false,
+                  "imgSrc": 'https://placehold.co/150',
               },
               {
                   "userId": 1,
