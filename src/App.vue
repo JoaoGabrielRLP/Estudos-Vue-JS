@@ -1,8 +1,20 @@
 <template>
   <div>
+   <h1 :class="{ 'title': true, 'title-home': isHome }"> <!-- chamando a variável no class -->
+        Teste em Vue 3
+    </h1>  
+
+    <p :class="pClass">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi officia unde iusto aspernatur doloribus quidem ut quasi laboriosam molestias inventore!
+    </p>
+
+    <p :style="styleClass">
+        lipsum dolor sit, amet consectetur adipisicing
+    </p>
+
       <div
           v-for="(obj, index) in todos"
-          v-bind:key="obj.id"
+          :key="obj.id"
           class="todos-item"
       >
 
@@ -11,7 +23,8 @@
         :src="obj.imgSrc"  
          
       >
-      /**Podemos usar o v-bind escrevendo apenas os 2 pontos ( : )*/
+      <!-- Podemos usar o v-bind escrevendo apenas os 2 pontos ( : ) -->.
+     
           {{ index}} - {{ obj.title }}
       </div>
 
@@ -25,6 +38,10 @@ export default {
   name: 'App',
   data() {
       return {
+          isHome: true,
+          classVar: 'title',   /**Criando a classe no data */ 
+          pClass: ['text', 'text-home'],   
+          styleClass: { 'color': 'aqua', backgroundColor: 'black'},   /*Podemos usar notações próprias do Vue para chamar elementos css*/
           imgAlt: 'Foto',          
           todos: [
               {
@@ -66,6 +83,24 @@ export default {
 </script>
 
 <style>
+.title{
+    font-size: 20px;
+    color: blue;
+}
+
+.title-home{
+    font-size: 40px;
+    color: green;
+}
+
+.text-home{
+    color: #42b983;
+}
+
+.text{
+    color: rgb(32, 196, 6);
+}
+
 .todos-item {
   background: #000;
   margin: 0 0 5px 0;
