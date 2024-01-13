@@ -1,6 +1,6 @@
 <template>
   <div>
-   <h1 :class="{ 'title': true, 'title-home': isHome }"> <!-- chamando a variável no class -->
+   <!--<h1 :class="{ 'title': true, 'title-home': isHome }">  chamando a variável no class
         Teste em Vue 3
     </h1>  
 
@@ -23,12 +23,87 @@
         :src="obj.imgSrc"  
          
       >
-      <!-- Podemos usar o v-bind escrevendo apenas os 2 pontos ( : ) -->.
+       Podemos usar o v-bind escrevendo apenas os 2 pontos ( : ) .
      
           {{ index}} - {{ obj.title }}
-      </div>
+      </div> -->
 
+     <div>
+        Two way data binding for
+
+        v-model 
+     </div>
+
+     <br>
+     <label>Nome</label><br>
+     <input 
+        v-model="name"
+        type="text"
+     >
+     <br>
+
+     {{ name }}
      
+     <br><br>
+
+     <div>
+        <select v-model="sports">
+            <option value="">Escolha</option>
+            <option value="Futebol">Futebol</option>
+            <option value="Skate">Skate</option>
+            <option value="Volei">Volei</option>
+        </select><br>
+        {{ sports }}
+     </div>
+     <br>
+    <div>
+        <label>Newsletter</label><br>
+
+        <input
+            v-model="newsletter" 
+            type="radio"
+            value="Sim"
+        > Sim
+
+        <input
+            v-model="newsletter" 
+            type="radio"
+            value="Não"
+        > Não
+
+        {{ newsletter }}
+    </div>
+
+   <br><br>
+
+   <label>Contrato</label><br>
+
+        <input
+            v-model="contract" 
+            type="checkbox"
+        > Aceita nossos termos?
+        
+        {{ contract }}
+
+        <br><br>
+
+        <div>
+        <label>Cores que você mais gosta</label><br>
+
+        <input
+            v-model="colors" 
+            type="checkbox"
+            value="Azul"
+        > Azul
+
+        <input
+            v-model="colors" 
+            type="checkbox"
+            value="Amarelo"
+        > Amarelo
+
+        {{ colors }}
+    </div>    
 
   </div>
 </template>
@@ -38,10 +113,10 @@ export default {
   name: 'App',
   data() {
       return {
-          isHome: true,
-          classVar: 'title',   /**Criando a classe no data */ 
+          /** isHome: true,  
+          classVar: 'title',   /**Criando a classe no data  
           pClass: ['text', 'text-home'],   
-          styleClass: { 'color': 'aqua', backgroundColor: 'black'},   /*Podemos usar notações próprias do Vue para chamar elementos css*/
+          styleClass: { 'color': 'aqua', backgroundColor: 'black'},   /*Podemos usar notações próprias do Vue para chamar elementos css
           imgAlt: 'Foto',          
           todos: [
               {
@@ -76,7 +151,12 @@ export default {
                   "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
                   "completed": false
               }
-          ]
+          ] */
+          name: 'Teste1',
+          sports: 'Futebol',
+          newsletter: 'Não',
+          contract: false,
+          colors: []
       }
   }
 }
