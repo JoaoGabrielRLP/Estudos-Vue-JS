@@ -26,7 +26,7 @@
        Podemos usar o v-bind escrevendo apenas os 2 pontos ( : ) .
      
           {{ index}} - {{ obj.title }}
-      </div> -->
+      </div> 
 
      <div>
         Two way data binding for
@@ -103,9 +103,36 @@
         > Amarelo
 
         {{ colors }}
-    </div>    
+    </div> -->   
 
-  </div>
+  </div> 
+
+  <button @click.once="onSubmit">
+        Enviar
+  </button> <!-- Modificador de evento-->
+
+  <button 
+    @mouseover="onMouseOver"
+    @mouseout="onMouseOut"
+  >
+     Mouse over
+  </button>
+
+  <br><br>
+
+  <form 
+    action="https://google.com"
+    @submit.prevent="onSubmit"
+  >
+  
+  <input 
+    type="text"
+    @keyup="onKeyUp" 
+  > <!-- Quando a tecla de cima do teclado for pressionada -->
+    <button type="submit">
+        Enviar
+    </button>
+  </form>
 </template>
 
 <script>
@@ -151,13 +178,33 @@ export default {
                   "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
                   "completed": false
               }
-          ] */
+          ] 
           name: 'Teste1',
           sports: 'Futebol',
           newsletter: 'Não',
           contract: false,
-          colors: []
+          colors: [] */
       }
+  },
+  methods: {
+        onClick($evt) {
+            console.log("Teste", $evt);
+        },
+
+        onMouseOver($evt) {
+            console.log('Mouse over', $evt)
+        },
+
+        onMouseOut($evt) {
+            console.log('Mouse out', $evt)
+        },
+
+        onSubmit($evt){
+            console.log('Submit', $evt)
+        },
+        onKeyUp($evt){
+            console.log('Key up', $evt)
+        }
   }
 }
 </script>
