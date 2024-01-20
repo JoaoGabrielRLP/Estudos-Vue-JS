@@ -1,45 +1,35 @@
 <template>
   <div>
-    {{ fullName }}
-
-    <h2>Todos em aberto</h2>
-  </div>  <br><br>
-  
-  <div
-    v-for="todo in uncompletedTodos" 
-    :key="todo.id"
-  > <!-- Percorrendo a lista que está em uncompletedTodos -->
-    {{ todo.title}} 
-  </div>
-
-  <h2>Todos completadas</h2>
-
-  <div
-    v-for="todo in completedTodos" 
-    :key="todo.id"
-  > <!-- Percorrendo a lista que está em completedTodos -->
-    {{ todo.title}} 
-  </div>
-
-  <br><br><br>
-
-  <h2>Todos </h2>
-
-  <div
-    v-for="todo in todos" 
-    :key="todo.id"
-  > 
-
     <input 
-      v-model="todo.completed"
-      type="checkbox"
-    >
-    {{ todo.title}} 
+        v-model="name"
+        type="text"
+      > <br>
 
-    <!-- O checkbo permite que seja alterado um valor no array de objetos, obejtos esses que está sendo percorrido por 2 métodos: completedTodos() e uncompletedTodos(), essas funções mostram se o ítem do objeto é verdadeiro ou falso respectivamente e ao alterar essa valor com o checkbo, a lista será recomputada dinamicamente -->
+      {{ name }}
+
+      <br><br>
+
+      <input 
+        v-model="user.first_name"
+        type="text"
+      > <br>
+
+      <input 
+        v-model="user.last_name"
+        type="text"
+      > <br>
+
+      {{ user.first_name }} {{ user.last_name }}
+      
+      <br><br>
+
+      <select v-model="pageCount">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+      </select>
+      {{ pageCount }}
   </div>
-
-
 </template>
 
 <script>
@@ -47,66 +37,46 @@ export default {
   name: 'App',
   data() {
       return {
-          user: {
-            first_name: 'João',
-            last_name: 'Gabriel'
-          },
-
-            todos: 
-
-          [
-    {
-    "userId": 1,
-    "id": 1,
-    "title": "delectus aut autem",
-    "completed": false
-    },
-  {
-    "userId": 1,
-    "id": 2,
-    "title": "quis ut nam facilis et officia qui",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 3,
-    "title": "fugiat veniam minus",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 4,
-    "title": "et porro tempora",
-    "completed": true
-  },
-  {
-    "userId": 1,
-    "id": 5,
-    "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
-    "completed": false
-  }
-    ]
+        name: '',
+        pageCount: 5,
+        user: {
+          first_name: '',
+          last_name: ''
+        }   
       }
   },
 
-  computed:{
-    fullName() {
-        return `${this.user.first_name} ${this.user.last_name}`
-    },
+  watch:{
+    name(vl){
+        if(vl.length >= 3){
+          this.saveUserName();
+        }        
+      },
+      pageCount(){
+        this.changePage();
+      },
 
-    uncompletedTodos() {
-    return this.todos.filter(todo => !todo.completed);
-    //Pede para retornar as todos que não estão completadas
-    },
+      user: {
+        handler(){
+          console.log('User alterado')
+        }, /**O handler significa que, quando o user (vinculado ao objeto por ter o mesmo nome) for alterado, deve executar o que estiver dentro das chaves */
 
-    completedTodos() {
-    return this.todos.filter(todo => todo.completed);
-    //Pede para retornar as todos estão completadas
-    },
+        deep: true /**Quando for alterado algo no objeto em si (definido em data() ) dispare o handler */
+      } /**Para observarmos objetos, é necessário declarar dessa maneira */
+  },
+
+  computed:{    
   }, 
 
-  methods: {
-        
+  methods: {   
+    saveUserName(){
+      console.log('Ajax');
+      console.log(this.name);     
+    },
+
+    changePage(){
+      console.log('Ajax changePage')
+    }
   }
 }
 </script>
