@@ -1,138 +1,45 @@
 <template>
   <div>
-   <!--<h1 :class="{ 'title': true, 'title-home': isHome }">  chamando a variável no class
-        Teste em Vue 3
-    </h1>  
+    {{ fullName }}
 
-    <p :class="pClass">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi officia unde iusto aspernatur doloribus quidem ut quasi laboriosam molestias inventore!
-    </p>
-
-    <p :style="styleClass">
-        lipsum dolor sit, amet consectetur adipisicing
-    </p>
-
-      <div
-          v-for="(obj, index) in todos"
-          :key="obj.id"
-          class="todos-item"
-      >
-
-      <img 
-        v-if="obj.imgSrc"
-        :src="obj.imgSrc"  
-         
-      >
-       Podemos usar o v-bind escrevendo apenas os 2 pontos ( : ) .
-     
-          {{ index}} - {{ obj.title }}
-      </div> 
-
-     <div>
-        Two way data binding for
-
-        v-model 
-     </div>
-
-     <br>
-     <label>Nome</label><br>
-     <input 
-        v-model="name"
-        type="text"
-     >
-     <br>
-
-     {{ name }}
-     
-     <br><br>
-
-     <div>
-        <select v-model="sports">
-            <option value="">Escolha</option>
-            <option value="Futebol">Futebol</option>
-            <option value="Skate">Skate</option>
-            <option value="Volei">Volei</option>
-        </select><br>
-        {{ sports }}
-     </div>
-     <br>
-    <div>
-        <label>Newsletter</label><br>
-
-        <input
-            v-model="newsletter" 
-            type="radio"
-            value="Sim"
-        > Sim
-
-        <input
-            v-model="newsletter" 
-            type="radio"
-            value="Não"
-        > Não
-
-        {{ newsletter }}
-    </div>
-
-   <br><br>
-
-   <label>Contrato</label><br>
-
-        <input
-            v-model="contract" 
-            type="checkbox"
-        > Aceita nossos termos?
-        
-        {{ contract }}
-
-        <br><br>
-
-        <div>
-        <label>Cores que você mais gosta</label><br>
-
-        <input
-            v-model="colors" 
-            type="checkbox"
-            value="Azul"
-        > Azul
-
-        <input
-            v-model="colors" 
-            type="checkbox"
-            value="Amarelo"
-        > Amarelo
-
-        {{ colors }}
-    </div> -->   
-
-  </div> 
-
-  <button @click.once="onSubmit">
-        Enviar
-  </button> <!-- Modificador de evento-->
-
-  <button 
-    @mouseover="onMouseOver"
-    @mouseout="onMouseOut"
-  >
-     Mouse over
-  </button>
-
-  <br><br>
-
-  <form 
-    action="https://google.com"
-    @submit.prevent="onSubmit"
-  >
+    <h2>Todos em aberto</h2>
+  </div>  <br><br>
   
-  <input 
-    type="text"
-    @keyup="onKeyUp" 
-  > <!-- Quando a tecla de cima do teclado for pressionada -->
-    <button type="submit">
-        Enviar
-    </button>
-  </form>
+  <div
+    v-for="todo in uncompletedTodos" 
+    :key="todo.id"
+  > <!-- Percorrendo a lista que está em uncompletedTodos -->
+    {{ todo.title}} 
+  </div>
+
+  <h2>Todos completadas</h2>
+
+  <div
+    v-for="todo in completedTodos" 
+    :key="todo.id"
+  > <!-- Percorrendo a lista que está em completedTodos -->
+    {{ todo.title}} 
+  </div>
+
+  <br><br><br>
+
+  <h2>Todos </h2>
+
+  <div
+    v-for="todo in todos" 
+    :key="todo.id"
+  > 
+
+    <input 
+      v-model="todo.completed"
+      type="checkbox"
+    >
+    {{ todo.title}} 
+
+    <!-- O checkbo permite que seja alterado um valor no array de objetos, obejtos esses que está sendo percorrido por 2 métodos: completedTodos() e uncompletedTodos(), essas funções mostram se o ítem do objeto é verdadeiro ou falso respectivamente e ao alterar essa valor com o checkbo, a lista será recomputada dinamicamente -->
+  </div>
+
+
 </template>
 
 <script>
@@ -140,71 +47,66 @@ export default {
   name: 'App',
   data() {
       return {
-          /** isHome: true,  
-          classVar: 'title',   /**Criando a classe no data  
-          pClass: ['text', 'text-home'],   
-          styleClass: { 'color': 'aqua', backgroundColor: 'black'},   /*Podemos usar notações próprias do Vue para chamar elementos css
-          imgAlt: 'Foto',          
-          todos: [
-              {
-                  "userId": 1,
-                  "id": 1,
-                  "title": "delectus aut autem",
-                  "completed": false,
-                  "imgSrc": 'https://placehold.co/150',
-              },
-              {
-                  "userId": 1,
-                  "id": 2,
-                  "title": "quis ut nam facilis et officia qui",
-                  "completed": false,
-                  "imgSrc": 'https://placehold.co/150',
-              },
-              {
-                  "userId": 1,
-                  "id": 3,
-                  "title": "fugiat veniam minus",
-                  "completed": false
-              },
-              {
-                  "userId": 1,
-                  "id": 4,
-                  "title": "et porro tempora",
-                  "completed": true
-              },
-              {
-                  "userId": 1,
-                  "id": 5,
-                  "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
-                  "completed": false
-              }
-          ] 
-          name: 'Teste1',
-          sports: 'Futebol',
-          newsletter: 'Não',
-          contract: false,
-          colors: [] */
+          user: {
+            first_name: 'João',
+            last_name: 'Gabriel'
+          },
+
+            todos: 
+
+          [
+    {
+    "userId": 1,
+    "id": 1,
+    "title": "delectus aut autem",
+    "completed": false
+    },
+  {
+    "userId": 1,
+    "id": 2,
+    "title": "quis ut nam facilis et officia qui",
+    "completed": false
+  },
+  {
+    "userId": 1,
+    "id": 3,
+    "title": "fugiat veniam minus",
+    "completed": false
+  },
+  {
+    "userId": 1,
+    "id": 4,
+    "title": "et porro tempora",
+    "completed": true
+  },
+  {
+    "userId": 1,
+    "id": 5,
+    "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
+    "completed": false
+  }
+    ]
       }
   },
+
+  computed:{
+    fullName() {
+        return `${this.user.first_name} ${this.user.last_name}`
+    },
+
+    uncompletedTodos() {
+    return this.todos.filter(todo => !todo.completed);
+    //Pede para retornar as todos que não estão completadas
+    },
+
+    completedTodos() {
+    return this.todos.filter(todo => todo.completed);
+    //Pede para retornar as todos estão completadas
+    },
+  }, 
+
   methods: {
-        onClick($evt) {
-            console.log("Teste", $evt);
-        },
-
-        onMouseOver($evt) {
-            console.log('Mouse over', $evt)
-        },
-
-        onMouseOut($evt) {
-            console.log('Mouse out', $evt)
-        },
-
-        onSubmit($evt){
-            console.log('Submit', $evt)
-        },
-        onKeyUp($evt){
-            console.log('Key up', $evt)
-        }
+        
   }
 }
 </script>
