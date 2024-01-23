@@ -1,83 +1,62 @@
 <template>
   <div>
+    <h1>Teste</h1>
+    <TheHeader v-if="showHeader" />
+    <br>
     <input 
         v-model="name"
         type="text"
-      > <br>
-
-      {{ name }}
-
-      <br><br>
-
-      <input 
-        v-model="user.first_name"
-        type="text"
-      > <br>
-
-      <input 
-        v-model="user.last_name"
-        type="text"
-      > <br>
-
-      {{ user.first_name }} {{ user.last_name }}
-      
-      <br><br>
-
-      <select v-model="pageCount">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-      </select>
-      {{ pageCount }}
+    >
+    {{ name }} <br>
+    <button @click="showHeader = !showHeader"> <!-- Lógica simples para realizar apenas um alteração de variável -->
+      Toggle
+    </button>
   </div>
 </template>
 
 <script>
+import TheHeader from './components/TheHeader.vue';
+
 export default {
-  name: 'App',
-  data() {
-      return {
-        name: '',
-        pageCount: 5,
-        user: {
-          first_name: '',
-          last_name: ''
-        }   
-      }
-  },
-
-  watch:{
-    name(vl){
-        if(vl.length >= 3){
-          this.saveUserName();
-        }        
-      },
-      pageCount(){
-        this.changePage();
-      },
-
-      user: {
-        handler(){
-          console.log('User alterado')
-        }, /**O handler significa que, quando o user (vinculado ao objeto por ter o mesmo nome) for alterado, deve executar o que estiver dentro das chaves */
-
-        deep: true /**Quando for alterado algo no objeto em si (definido em data() ) dispare o handler */
-      } /**Para observarmos objetos, é necessário declarar dessa maneira */
-  },
-
-  computed:{    
-  }, 
-
-  methods: {   
-    saveUserName(){
-      console.log('Ajax');
-      console.log(this.name);     
+    name: 'App',
+    components: { TheHeader },
+    data() {
+        return {
+            name: 'João Gabriel',
+            showHeader: true,
+        };
+    },
+    /*beforeUpdate(){
+        console.log('before update', this.name)
     },
 
-    changePage(){
-      console.log('Ajax changePage')
-    }
-  }
+    update(){
+        console.log('updated', this.name)
+    },
+     beforeCreate() { 
+        console.log('Before create'); //* Não tem acesso ao estado nem ao dom
+        console.log('Estado: ', this.name);
+        console.log('Dom: ', this.$el);
+        /**El seria como se fosse o root, pois vai puxar o elemento raiz do componente na template
+    },
+    created() {
+        console.log('Created');
+        console.log('Estado: ', this.name); //* Tem acesso ao estado mas nao ao dom
+        console.log('Dom: ', this.$el);
+    },
+    beforeMount() {
+        console.log('Before amount');
+        console.log('Estado: ', this.name); //* Tem acesso ao estado mas nao ao dom
+        console.log('Dom: ', this.$el);
+    },
+    mounted() {
+        console.log('mounted');
+        console.log('Estado: ', this.name); //* Tem acesso ao estado e ao dom
+        console.log('Dom: ', this.$el);
+    }, */
+    watch: {},
+    computed: {},
+    methods: {},
 }
 </script>
 
