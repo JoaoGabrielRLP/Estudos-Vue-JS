@@ -1,17 +1,11 @@
 <template>
-  <div>
-    <h1>Teste</h1>
-    <TheHeader v-if="showHeader" />
-    <br>
-    <input 
-        v-model="name"
-        type="text"
-    >
-    {{ name }} <br>
-    <button @click="showHeader = !showHeader"> <!-- Lógica simples para realizar apenas um alteração de variável -->
-      Toggle
-    </button>
-  </div>
+  <TheHeader>
+    <template v-slot:description>
+        <p>Description</p>
+    </template>
+
+    Conteudo do menu <!-- Quando criamos algo dentro do template e não especificamos o slot, ele pegará o slot sem nome (default) -->
+  </TheHeader>    
 </template>
 
 <script>
@@ -26,34 +20,18 @@ export default {
             showHeader: true,
         };
     },
-    /*beforeUpdate(){
-        console.log('before update', this.name)
-    },
+    beforeUpdate(){},
 
-    update(){
-        console.log('updated', this.name)
-    },
-     beforeCreate() { 
-        console.log('Before create'); //* Não tem acesso ao estado nem ao dom
-        console.log('Estado: ', this.name);
-        console.log('Dom: ', this.$el);
-        /**El seria como se fosse o root, pois vai puxar o elemento raiz do componente na template
-    },
-    created() {
-        console.log('Created');
-        console.log('Estado: ', this.name); //* Tem acesso ao estado mas nao ao dom
-        console.log('Dom: ', this.$el);
-    },
-    beforeMount() {
-        console.log('Before amount');
-        console.log('Estado: ', this.name); //* Tem acesso ao estado mas nao ao dom
-        console.log('Dom: ', this.$el);
-    },
-    mounted() {
-        console.log('mounted');
-        console.log('Estado: ', this.name); //* Tem acesso ao estado e ao dom
-        console.log('Dom: ', this.$el);
-    }, */
+    update() {},
+
+    beforeCreate() {},
+
+    created() {},
+
+    beforeMount() {},
+
+    mounted() {}, 
+    
     watch: {},
     computed: {},
     methods: {},
