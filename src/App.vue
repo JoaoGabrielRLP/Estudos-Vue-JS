@@ -1,23 +1,17 @@
 <template>
-  <TheHeader>
-    <template v-slot:description>
-        <p>Description</p>
-    </template>
-
-    Conteudo do menu <!-- Quando criamos algo dentro do template e não especificamos o slot, ele pegará o slot sem nome (default) -->
-  </TheHeader>    
+  <div>
+    <BaseCard />
+  </div>
 </template>
 
 <script>
-import TheHeader from './components/TheHeader.vue';
-
+import BaseCard from '@/components/BaseCard'; // O @ significa que estamos dentro da pasta SRC
 export default {
     name: 'App',
-    components: { TheHeader },
+    components: { BaseCard },
     data() {
         return {
-            name: 'João Gabriel',
-            showHeader: true,
+            
         };
     },
     beforeUpdate(){},
