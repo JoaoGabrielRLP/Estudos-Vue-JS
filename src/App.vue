@@ -1,34 +1,35 @@
 <template>
   <div>
-    <BaseCard />
+    <BaseAlert 
+      :variant="variant"
+    > 
+      {{ text }}
+    </BaseAlert> <!-- Aqui dizemos que o prop variant recebe sucess -->
   </div>
 </template>
 
 <script>
-import BaseCard from '@/components/BaseCard'; // O @ significa que estamos dentro da pasta SRC
+import BaseAlert from './components/BaseAlert.vue';
+
+
 export default {
     name: 'App',
-    components: { BaseCard },
     data() {
         return {
-            
+          variant: 'success',
+          text: 'Seu formulário foi enviado'
         };
     },
-    beforeUpdate(){},
-
-    update() {},
-
-    beforeCreate() {},
-
-    created() {},
-
-    beforeMount() {},
-
-    mounted() {}, 
-    
+    beforeUpdate() { },
+    update() { },
+    beforeCreate() { },
+    created() { },
+    beforeMount() { },
+    mounted() { },
     watch: {},
     computed: {},
     methods: {},
+    components: { BaseAlert }
 }
 </script>
 
