@@ -1,9 +1,11 @@
 <template>
-    <div :class="BaseClass"> <!-- Quando o que estiver na classe for verdadeiro, ou seja, se a classe existir, aplique a classe css ao prop variant que é igual a 'sucess', esse 'sucess' está definido no app.vue -->
+    <div :class="BaseClass"> <!-- Quando o que estiver na classe for verdadeiro, ou seja, se a classe existir, aplique a classe css ao prop variant que é igual a 'sucess', esse 'sucess' está definido no app.vue --> 
+        
+        <slot />
 
-    <!-- Estamos injetando a variant na class -->
-    {{ test }}
-    <slot />
+        <button @click="onClick()">
+            X
+        </button>
     </div>
 </template>
 
@@ -15,10 +17,6 @@
                 type: String,
                 default: ''
             },
-            test: {
-                type: String,
-                default: 'test'
-            }
         },
 
         computed: {
@@ -28,12 +26,21 @@
                     this.variant ? `alert-${this.variant}` : ''
                 ]
             }
+        },
+
+        methods: {
+            onClick(){
+                this.$emit('close') //Evento personalizado
+                console.log('Clicou');
+            }
         }
     }
 </script>
 
 <style scoped>
     .alert {
+        display: flex;
+        justify-content: space-between;
         padding: 5px;
         border-radius: 6px;
         color: gray; 

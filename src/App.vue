@@ -1,7 +1,9 @@
 <template>
   <div>
     <BaseAlert 
+      v-if="showAlert"
       :variant="variant"
+      @close="onClose()"
     > 
       {{ text }}
     </BaseAlert> <!-- Aqui dizemos que o prop variant recebe sucess -->
@@ -16,6 +18,7 @@ export default {
     name: 'App',
     data() {
         return {
+          showAlert: true,
           variant: 'success',
           text: 'Seu formulário foi enviado'
         };
@@ -28,7 +31,12 @@ export default {
     mounted() { },
     watch: {},
     computed: {},
-    methods: {},
+    methods: {
+      onClose(){
+        this.showAlert = false
+        console.log('On close')
+      }
+    },
     components: { BaseAlert }
 }
 </script>
