@@ -2,6 +2,7 @@
   <nav>
     <RouterLink to="/">Home</RouterLink> |
     <router-link to="/about">About</router-link> |
+    <RouterLink to="/usuarios/10">Usuário</RouterLink> |
     <RouterLink :to="rotaDinamica">Serviços</RouterLink> 
   </nav>
   <RouterView/> <!-- É aqui que fazemos a injeção das views proprieamente dita -->
@@ -22,7 +23,6 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
